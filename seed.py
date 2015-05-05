@@ -39,7 +39,6 @@ def load_movies():
         else:
             movie = Movie(movie_id=movie_id, title=title, imdb_url=imdb_url)
 
-        
         db.session.add(movie)
 
     db.session.commit()
