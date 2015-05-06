@@ -9,18 +9,29 @@
     <body>
       Ratings
     
-    <!--<h4>Login</h4>
-    <p><a href="/login">Login here</a></p> -->
-      
-      <hr>
-        <!-- Show flashed messages -->
-          {% with messages = get_flashed_messages() %}
-              {% for message in messages %}
-                  <div class="alert alert-warning">{{ message }}</div>
-              {% endfor %}
-          {% endwith %}
+        <!-- show if logged in or not -->
+        <div class="logstatus">
+            {% if "logged_in_user_email" in session %}
+              <li><a href="/logout">Log Out</a></li>
+            {% else %}
+              <li><a href="/login">Log In</a></li>
+            {% endif %}
+        </div>
 
-          {% block content %} put your content here {% endblock %}
+           
+        <!-- Show flashed messages -->
+        <div class="flash">
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <div class="alert alert-warning">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+        </div>
+
+            
+        <hr>
+
+            {% block content %} put your content here {% endblock %}
 
     </body>
 
