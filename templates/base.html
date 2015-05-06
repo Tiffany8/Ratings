@@ -9,12 +9,18 @@
     <body>
       Ratings
     
-<!--       <h4>Login</h4>
-      <p><a href="/login">Login here</a></p> -->
+    <!--<h4>Login</h4>
+    <p><a href="/login">Login here</a></p> -->
       
       <hr>
+        <!-- Show flashed messages -->
+          {% with messages = get_flashed_messages() %}
+              {% for message in messages %}
+                  <div class="alert alert-warning">{{ message }}</div>
+              {% endfor %}
+          {% endwith %}
 
-      {% block content %} put your content here {% endblock %}
+          {% block content %} put your content here {% endblock %}
 
     </body>
 
