@@ -9,6 +9,20 @@
         <li>
           Zipcode: {{ user.zipcode }}
         </li>
+        <li>Ratings: 
+         
+              <table class="movie_list">
+                {% for rating in user.ratings %}
+                <tr>
+                  <td>{{ rating.movie.title }}</td>
+                  <td>{{ rating.score }}</td>
+              
+              </tr>
+              {% endfor %}
+              </table>
+            
+        </li>
+        
     </ul>
 
 {% endblock %}
