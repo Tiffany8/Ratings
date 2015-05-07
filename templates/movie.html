@@ -2,14 +2,47 @@
 {% block content %}
 
     <h2>Title: {{ movie.title }} </h2>
-    <ul>
+    
         <li>
-          <a href="{{ movie.imdb_url }}">(IMDB)</a>      
+          <a href="{{ movie.imdb_url }}">See details on IMDB</a>      
         </li>
         <li>
           Released: {{ movie.released_at }}   
         </li>
+
+        <!-- Enter movie rating? -->
+        {% if "logged_in_user_email" in session %}
+          <div class="current"> 
+            Your Rating: 5
+          </div>
+
+
+          <!-- if user already scored, then display score -->
+
+            <!-- update = True -->
+          <!-- else display 'you have not scored this movie yet' -->
+            <!-- insert = true -->
+        <!-- both options have option to "input score"....-->
+                {% endif %}
+      
+      <form class="movie-rating-form" action='/movies/{{ movie.movie_id }}' method="POST">
+
+        <h2 class="form-heading">Rate this Movie</h2>
+
+        <div class="form-group">
+            <label class="score">Your score:</label>
+              <input type="radio" name="score" value="1">1
+              <input type="radio" name="score" value="2">2
+              <input type="radio" name="score" value="3">3
+              <input type="radio" name="score" value="4">4
+              <input type="radio" name="score" value="5">5
+        </div>
+      </form>
+
+
+
      
+      <ul>
         <li>Ratings: 
          
               <table class="rating_list">
