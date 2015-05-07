@@ -1,19 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h2>Title: {{ movie.title }} </h2>
+    <h2>Title: {{ movie_object.title }} </h2>
     
         <li>
-          <a href="{{ movie.imdb_url }}">See details on IMDB</a>      
+          <a href="{{ movie_object.imdb_url }}">See details on IMDB</a>      
         </li>
         <li>
-          Released: {{ movie.released_at }}   
+          Released: {{ movie_object.released_at }}   
         </li>
 
         <!-- Enter movie rating? -->
-        {% if "logged_in_user_email" in session %}
+        {% if "logged_in_user_id" in session %}
+          Your user_id is: {{ user_id }}
+
+
           <div class="current"> 
-            Your Rating: 5
+            Your Rating: User
+            this returns the user_id session["logged_in_user_id"] 
+            user_score = Rating.query.filter_by(ratings.user_id=session["logged_in_user_id"])
+            user.ratings()
+            ratings.score()
+
+
           </div>
 
 
@@ -25,7 +34,7 @@
         <!-- both options have option to "input score"....-->
                 {% endif %}
       
-      <form class="movie-rating-form" action='/movies/{{ movie.movie_id }}' method="POST">
+      <form class="movie-rating-form" action='/movies/{{ movie_object.movie_id }}' method="POST">
 
         <h2 class="form-heading">Rate this Movie</h2>
 
@@ -36,7 +45,9 @@
               <input type="radio" name="score" value="3">3
               <input type="radio" name="score" value="4">4
               <input type="radio" name="score" value="5">5
+
         </div>
+         <button class="rate" type="submit">Submit</button>
       </form>
 
 
@@ -46,9 +57,10 @@
         <li>Ratings: 
          
               <table class="rating_list">
-              {% for rating in movie.ratings %}
+              {% for rating in movie_object.ratings %}
                 <tr>
-                   <td>{{ rating.score }}</td>
+
+                   <td>User <a href="/users/{{ rating.user_id }}">{{ rating.user_id }}</a> rated {{ rating.score }}</td>
                 </tr>
           
               {% endfor %}
