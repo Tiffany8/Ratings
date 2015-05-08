@@ -14,25 +14,14 @@
         {% if "logged_in_user_id" in session %}
           Your user_id is: {{ user_id }}
 
-
+        {% endif %}
+        
+        <!-- "if <variable> is defined" can be used as an if statement in jinja2 - this will show score only if a score has been provided by user -->
+        {% if score is defined %}
           <div class="current"> 
-            Your Rating: User
-            this returns the user_id session["logged_in_user_id"] 
-            user_score = Rating.query.filter_by(ratings.user_id=session["logged_in_user_id"])
-            user.ratings()
-            ratings.score()
-
-
+            Your Rating: {{ score }} 
           </div>
-
-
-          <!-- if user already scored, then display score -->
-
-            <!-- update = True -->
-          <!-- else display 'you have not scored this movie yet' -->
-            <!-- insert = true -->
-        <!-- both options have option to "input score"....-->
-                {% endif %}
+        {% endif %}
       
       <form class="movie-rating-form" action='/movies/{{ movie_object.movie_id }}' method="POST">
 
